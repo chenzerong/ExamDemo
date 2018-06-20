@@ -1,21 +1,21 @@
 第1题：
-（1）SELECT A .*, b.dept_name FROM employee A, department b WHERE
-A .departmentid = b.departmentid AND A .salary <= ( SELECT salary FROM(SELECT salary,rownum rn FROM(SELECT DISTINCT salary
-FROM employee ORDER BY salary DESC))WHERE rn = 3);
 
-（2）select d.Name Department ,e1.Name Employee,e1.Salary Salary ??
-
-from Employee e1 ?
-inner join Department d on e1.DepartmentId= d.Id ?
-
-where 3 >= (select count(distinct(e2.Salary)) from Employee e2 where e2.Salary >=e1.Salary and e2.DepartmentId=d.Id) 
-order by d.Name,e1.Salary Desc; 
+（1）select count(distinct a.msisdn) from pagevisit a, user_info b
+where a.msisdn = b.msisdn
+and b.sex='男'
+and a.pv > 100
+and to_number(a.record_day) between 20171001 and 20171007;
+（2）select d.Name Department ,e1.Name Employee,e1.Salary Salary   
+from Employee e1  
+inner join Department d on e1.DepartmentId= d.Id  
+where 3 >= (  
+           select count(distinct(e2.Salary)) from Employee e2 where e2.Salary >=e1.Salary and e2.DepartmentId=d.Id  
+       ) order by d.Name,e1.Salary Desc;
 
 第2题：
 SELECT A .*, b.dept_name FROM employee A, department b WHERE
 A .departmentid = b.departmentid AND A .salary <= ( SELECT salary FROM(SELECT salary,rownum rn FROM(SELECT DISTINCT salary
 FROM employee ORDER BY salary DESC))WHERE rn = 3);
-
 
 第3题：
 select t.Request_at Day,ROUND(sum((casewhen t.Status like 'cancelled%' then 1 else 0 end))/count(*),2)
